@@ -76,3 +76,4 @@ desktop.ini
 coverage/
 *.tmp
 docs/
+BUILD.md
