@@ -13,6 +13,7 @@ class Appearance {
     required this.bookmarkPadding,
     this.displayVotingThumbs = true,
     this.entryUnreadColor,
+    this.compact = false,
   });
 
   factory Appearance.fromPrefs(AppPrefs prefs, {bool systemDark = true}) =>
@@ -22,12 +23,14 @@ class Appearance {
         bookmarkPadding: prefs.bookmarkPadding,
         displayVotingThumbs: prefs.displayVotingThumbs,
         entryUnreadColor: _parseColor(prefs.unreadAppearance),
+        compact: prefs.density == 'compact',
       );
 
   final bool isDark;
   final double fontSize;
   final double bookmarkPadding;
   final bool displayVotingThumbs;
+  final bool compact;
 
   final Color? entryUnreadColor;
 

@@ -24,6 +24,10 @@ class AppPrefs {
   static const kBackpressReturnsWriteup = 'backpress_returns_writeup';
   static const kLanguage = 'language';
   static const kHistoryBooked = 'history_show_booked';
+  static const kDensity = 'layout_density';
+
+  String get density =>
+      _prefs.getString(kDensity) == 'compact' ? 'compact' : 'comfortable';
 
   String get historyBooked {
     final v = _prefs.getString(kHistoryBooked);

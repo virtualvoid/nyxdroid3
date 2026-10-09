@@ -214,5 +214,9 @@
   "settingsHistoryBookedSummary": "Vyberte, zda se sledované diskuze zobrazují v historii.",
   "historyBookedDefault": "Podle webu",
   "historyBookedShow": "Zobrazit",
-  "historyBookedHide": "Skrýt"
+  "historyBookedHide": "Skrýt",
+  "settingsDensity": "Hustota zobrazení",
+  "settingsDensitySummary": "Kompaktní zobrazení šetří místo na obrazovce v seznamech a příspěvcích.",
+  "densityCompact": "Kompaktní",
+  "densityComfortable": "Pohodlná"
 }

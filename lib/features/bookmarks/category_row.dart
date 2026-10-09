@@ -48,7 +48,11 @@ class CategoryRow extends StatelessWidget {
                 key: Key('category_chevron_${category.id}'),
                 turns: expanded! ? 0.5 : 0,
                 duration: const Duration(milliseconds: 200),
-                child: Icon(Icons.expand_more, color: scheme.onSurfaceVariant),
+                child: Icon(
+                  Icons.expand_more,
+                  size: appearance.compact ? 20 : 24,
+                  color: scheme.onSurfaceVariant,
+                ),
               ),
           ],
         ),

@@ -592,4 +592,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get historyBookedHide => 'Hide';
+
+  @override
+  String get settingsDensity => 'Display density';
+
+  @override
+  String get settingsDensitySummary =>
+      'Compact layout saves screen space in lists and posts.';
+
+  @override
+  String get densityCompact => 'Compact';
+
+  @override
+  String get densityComfortable => 'Comfortable';
 }

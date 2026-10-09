@@ -8,6 +8,7 @@ import '../../app/widgets/entry_header.dart';
 import '../../app/widgets/feed_card.dart';
 import '../../core/models/writeup.dart';
 import '../../l10n/app_localizations.dart';
+import 'compact_votes.dart';
 import 'content_html.dart';
 import 'poll_answers.dart';
 import 'post_html.dart';
@@ -71,8 +72,8 @@ class _WriteupTileState extends State<WriteupTile> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              NickAvatar(nick: wu.nick, size: 40),
-              const SizedBox(width: 10),
+              NickAvatar(nick: wu.nick, size: ap.compact ? 32 : 40),
+              SizedBox(width: ap.compact ? 8 : 10),
               Expanded(
                 child: EntryHeader(
                   nick: wu.nick,
@@ -81,8 +82,15 @@ class _WriteupTileState extends State<WriteupTile> {
                   location: wu.location,
                   appearance: ap,
                   now: widget.now,
+                  stacked: ap.compact,
                 ),
               ),
+              if (ap.compact && ap.displayVotingThumbs)
+                CompactVotes(
+                  writeup: wu,
+                  appearance: ap,
+                  onVote: widget.onVote,
+                ),
               if (widget.selectionVisible && !wu.isPoll)
                 SizedBox(
                   height: 24,
@@ -96,11 +104,11 @@ class _WriteupTileState extends State<WriteupTile> {
                 ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: ap.compact ? 4 : 8),
           _body(l10n, wu, ap),
           if (wu.poll != null)
             PollAnswers(poll: wu.poll!, onVote: widget.onPollVote),
-          if (ap.displayVotingThumbs)
+          if (!ap.compact && ap.displayVotingThumbs)
             VoteBar(writeup: wu, appearance: ap, onVote: widget.onVote),
         ],
       ),

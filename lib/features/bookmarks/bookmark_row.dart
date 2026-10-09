@@ -35,7 +35,11 @@ class BookmarkRow extends StatelessWidget {
         appearance: appearance,
         child: Row(
           children: [
-            UnreadBadge(count: bookmark.unread, fontSize: appearance.fontSize),
+            UnreadBadge(
+              count: bookmark.unread,
+              fontSize: appearance.fontSize,
+              compact: appearance.compact,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,6 +74,7 @@ class BookmarkRow extends StatelessWidget {
               ReplyBadge(
                 count: bookmark.replies,
                 fontSize: appearance.fontSize,
+                compact: appearance.compact,
               ),
             ],
           ],

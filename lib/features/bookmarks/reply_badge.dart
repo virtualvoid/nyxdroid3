@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 
 class ReplyBadge extends StatelessWidget {
-  const ReplyBadge({super.key, required this.count, required this.fontSize});
+  const ReplyBadge({
+    super.key,
+    required this.count,
+    required this.fontSize,
+    this.compact = false,
+  });
 
   final int count;
   final double fontSize;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,7 @@ class ReplyBadge extends StatelessWidget {
       message: AppLocalizations.of(context).replyBadge(count),
       child: Container(
         key: const Key('reply_badge'),
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: compact ? 0 : 2),
         decoration: BoxDecoration(
           color: scheme.tertiaryContainer,
           borderRadius: BorderRadius.circular(12),

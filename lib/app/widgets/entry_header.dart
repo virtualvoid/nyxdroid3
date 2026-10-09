@@ -18,6 +18,7 @@ class EntryHeader extends StatelessWidget {
     required this.now,
     this.location,
     this.mirrored = false,
+    this.stacked = false,
   });
 
   final String nick;
@@ -27,6 +28,7 @@ class EntryHeader extends StatelessWidget {
   final DateTime now;
   final UserActivity? location;
   final bool mirrored;
+  final bool stacked;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +74,24 @@ class EntryHeader extends StatelessWidget {
             style: const TextStyle(fontSize: 8),
           )
         : null;
+
+    if (stacked) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(children: [nickText, mark]),
+          Row(
+            children: [
+              timeText,
+              if (locationText != null) ...[
+                const SizedBox(width: 6),
+                Flexible(child: locationText),
+              ],
+            ],
+          ),
+        ],
+      );
+    }
 
     return Column(
       crossAxisAlignment: mirrored

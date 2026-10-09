@@ -29,10 +29,10 @@ class RowFrame extends StatelessWidget {
           ),
         ),
       ),
-      constraints: const BoxConstraints(minHeight: 48),
+      constraints: BoxConstraints(minHeight: appearance.compact ? 0 : 48),
       padding: EdgeInsets.symmetric(
-        horizontal: 12 + appearance.bookmarkPadding,
-        vertical: appearance.bookmarkPadding,
+        horizontal: (appearance.compact ? 10 : 12) + appearance.bookmarkPadding,
+        vertical: (appearance.compact ? 5 : 0) + appearance.bookmarkPadding,
       ),
       alignment: Alignment.centerLeft,
       child: child,

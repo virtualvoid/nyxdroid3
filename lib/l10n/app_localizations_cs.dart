@@ -590,4 +590,17 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get historyBookedHide => 'Skrýt';
+
+  @override
+  String get settingsDensity => 'Hustota zobrazení';
+
+  @override
+  String get settingsDensitySummary =>
+      'Kompaktní zobrazení šetří místo na obrazovce v seznamech a příspěvcích.';
+
+  @override
+  String get densityCompact => 'Kompaktní';
+
+  @override
+  String get densityComfortable => 'Pohodlná';
 }

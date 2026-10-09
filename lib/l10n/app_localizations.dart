@@ -1135,6 +1135,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hide'**
   String get historyBookedHide;
+
+  /// No description provided for @settingsDensity.
+  ///
+  /// In en, this message translates to:
+  /// **'Display density'**
+  String get settingsDensity;
+
+  /// No description provided for @settingsDensitySummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Compact layout saves screen space in lists and posts.'**
+  String get settingsDensitySummary;
+
+  /// No description provided for @densityCompact.
+  ///
+  /// In en, this message translates to:
+  /// **'Compact'**
+  String get densityCompact;
+
+  /// No description provided for @densityComfortable.
+  ///
+  /// In en, this message translates to:
+  /// **'Comfortable'**
+  String get densityComfortable;
 }
 
 class _AppLocalizationsDelegate

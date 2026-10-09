@@ -214,5 +214,9 @@
   "settingsHistoryBookedSummary": "Please choose whether bookmarked discussions are shown in history.",
   "historyBookedDefault": "As on the website",
   "historyBookedShow": "Show",
-  "historyBookedHide": "Hide"
+  "historyBookedHide": "Hide",
+  "settingsDensity": "Display density",
+  "settingsDensitySummary": "Compact layout saves screen space in lists and posts.",
+  "densityCompact": "Compact",
+  "densityComfortable": "Comfortable"
 }

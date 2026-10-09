@@ -3,24 +3,30 @@
 import 'package:flutter/material.dart';
 
 class UnreadBadge extends StatelessWidget {
-  const UnreadBadge({super.key, required this.count, required this.fontSize});
+  const UnreadBadge({
+    super.key,
+    required this.count,
+    required this.fontSize,
+    this.compact = false,
+  });
 
   final int count;
   final double fontSize;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     return SizedBox(
-      width: 48,
+      width: compact ? 40 : 48,
       child: count > 0
           ? Center(
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 8,
-                    vertical: 2,
+                    vertical: compact ? 0 : 2,
                   ),
                   constraints: const BoxConstraints(minWidth: 28),
                   decoration: BoxDecoration(

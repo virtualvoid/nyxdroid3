@@ -153,6 +153,18 @@ class SettingsScreen extends ConsumerWidget {
                 onChanged: (v) =>
                     notifier.setString(AppPrefs.kBookmarkPadding, v),
               ),
+              ChoiceSetting<String>(
+                key: const Key('setting_density'),
+                icon: Icons.density_small,
+                title: l10n.settingsDensity,
+                summary: l10n.settingsDensitySummary,
+                value: prefs.density,
+                options: [
+                  ChoiceOption('compact', l10n.densityCompact),
+                  ChoiceOption('comfortable', l10n.densityComfortable),
+                ],
+                onChanged: (v) => notifier.setString(AppPrefs.kDensity, v),
+              ),
               SwitchSetting(
                 key: const Key('setting_voting_thumbs'),
                 icon: Icons.thumbs_up_down_outlined,

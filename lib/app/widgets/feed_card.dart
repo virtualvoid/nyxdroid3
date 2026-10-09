@@ -1,8 +1,11 @@
 // author: juraj.suchan@gmail.com
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FeedCard extends StatelessWidget {
+import '../../core/providers.dart';
+
+class FeedCard extends ConsumerWidget {
   const FeedCard({
     super.key,
     required this.child,
@@ -19,7 +22,8 @@ class FeedCard extends StatelessWidget {
   final bool highlighted;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final compact = ref.watch(appearanceProvider.select((a) => a.compact));
     final scheme = Theme.of(context).colorScheme;
     final color = highlighted
         ? Color.alphaBlend(
@@ -29,10 +33,13 @@ class FeedCard extends StatelessWidget {
         : scheme.surfaceContainerHigh;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      padding: EdgeInsets.symmetric(
+        horizontal: compact ? 8 : 12,
+        vertical: compact ? 2 : 4,
+      ),
       child: Material(
         color: color,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(compact ? 12 : 16),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,
@@ -51,7 +58,12 @@ class FeedCard extends StatelessWidget {
                   ),
                 ),
               Padding(
-                padding: EdgeInsets.fromLTRB(accent ? 16 : 12, 10, 12, 10),
+                padding: EdgeInsets.fromLTRB(
+                  accent ? 16 : (compact ? 10 : 12),
+                  compact ? 6 : 10,
+                  compact ? 10 : 12,
+                  compact ? 6 : 10,
+                ),
                 child: child,
               ),
             ],
