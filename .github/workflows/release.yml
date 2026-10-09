@@ -1,0 +1,122 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  FLUTTER_VERSION: '3.47.6'
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check that the tag matches the version in pubspec.yaml
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          PUBSPEC_VERSION="$(grep -E '^version:' pubspec.yaml | head -n1 | sed -E 's/^version:[[:space:]]*//; s/\+.*$//' | tr -d '\r')"
+          echo "Tag version:     ${TAG_VERSION}"
+          echo "pubspec version: ${PUBSPEC_VERSION}"
+          if [ "${TAG_VERSION}" != "${PUBSPEC_VERSION}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match version ${PUBSPEC_VERSION} in pubspec.yaml. Update pubspec.yaml, commit and tag again."
+            exit 1
+          fi
+
+      - name: Check that the required secrets are set
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          missing=0
+          for name in GOOGLE_SERVICES_JSON ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository secret ${name} is not set."
+              missing=1
+            fi
+          done
+          exit "${missing}"
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Restore Firebase configuration
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: printf '%s' "${GOOGLE_SERVICES_JSON}" | base64 --decode > android/app/google-services.json
+
+      - name: Restore the release keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          printf '%s' "${ANDROID_KEYSTORE_BASE64}" | base64 --decode > android/release.jks
+          {
+            echo "storeFile=release.jks"
+            echo "storePassword=${ANDROID_KEYSTORE_PASSWORD}"
+            echo "keyAlias=${ANDROID_KEY_ALIAS}"
+            echo "keyPassword=${ANDROID_KEY_PASSWORD}"
+          } > android/key.properties
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze --no-pub
+
+      - name: Build release APKs
+        run: |
+          flutter build apk --release
+          flutter build apk --release --split-per-abi
+
+      - name: Collect the artifacts
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          OUT="build/release-assets"
+          mkdir -p "${OUT}"
+          cp build/app/outputs/flutter-apk/app-release.apk "${OUT}/nyxdroid-${VERSION}.apk"
+          cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk "${OUT}/nyxdroid-${VERSION}-arm64-v8a.apk"
+          cp build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk "${OUT}/nyxdroid-${VERSION}-armeabi-v7a.apk"
+          cp build/app/outputs/flutter-apk/app-x86_64-release.apk "${OUT}/nyxdroid-${VERSION}-x86_64.apk"
+          (cd "${OUT}" && sha256sum *.apk > SHA256SUMS.txt && cat SHA256SUMS.txt)
+
+      - name: Publish the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            build/release-assets/*.apk
+            build/release-assets/SHA256SUMS.txt
+
+      - name: Remove the secrets from the runner
+        if: always()
+        run: rm -f android/app/google-services.json android/release.jks android/key.properties
