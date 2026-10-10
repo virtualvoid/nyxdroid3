@@ -218,5 +218,6 @@
   "settingsDensity": "Hustota zobrazení",
   "settingsDensitySummary": "Kompaktní zobrazení šetří místo na obrazovce v seznamech a příspěvcích.",
   "densityCompact": "Kompaktní",
-  "densityComfortable": "Pohodlná"
+  "densityComfortable": "Pohodlná",
+  "settingsHistoryTimes": "Časy v historii"
 }

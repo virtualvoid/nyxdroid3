@@ -290,7 +290,7 @@ class _BookmarksScreenState extends ConsumerState<BookmarksScreen> {
       child: BookmarkRow(
         bookmark: bookmark,
         appearance: appearance,
-        subtitle: bookmark.lastVisitedAt == null
+        subtitle: bookmark.lastVisitedAt == null || !appearance.historyTimes
             ? null
             : relativeTime(l10n, bookmark.lastVisitedAt!, now),
         onTap: () => _open(bookmark),

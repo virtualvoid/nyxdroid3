@@ -218,5 +218,6 @@
   "settingsDensity": "Display density",
   "settingsDensitySummary": "Compact layout saves screen space in lists and posts.",
   "densityCompact": "Compact",
-  "densityComfortable": "Comfortable"
+  "densityComfortable": "Comfortable",
+  "settingsHistoryTimes": "Times in history"
 }

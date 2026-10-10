@@ -25,6 +25,9 @@ class AppPrefs {
   static const kLanguage = 'language';
   static const kHistoryBooked = 'history_show_booked';
   static const kDensity = 'layout_density';
+  static const kHistoryTimes = 'history_times';
+
+  bool get historyTimes => _prefs.getBool(kHistoryTimes) ?? true;
 
   String get density =>
       _prefs.getString(kDensity) == 'compact' ? 'compact' : 'comfortable';

@@ -603,4 +603,7 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get densityComfortable => 'Pohodlná';
+
+  @override
+  String get settingsHistoryTimes => 'Časy v historii';
 }

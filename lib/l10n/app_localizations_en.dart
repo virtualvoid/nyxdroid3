@@ -605,4 +605,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get densityComfortable => 'Comfortable';
+
+  @override
+  String get settingsHistoryTimes => 'Times in history';
 }

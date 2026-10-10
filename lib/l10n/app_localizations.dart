@@ -1159,6 +1159,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Comfortable'**
   String get densityComfortable;
+
+  /// No description provided for @settingsHistoryTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Times in history'**
+  String get settingsHistoryTimes;
 }
 
 class _AppLocalizationsDelegate

@@ -213,6 +213,15 @@ class SettingsScreen extends ConsumerWidget {
                 value: prefs.showReadHistory,
                 onChanged: (v) => notifier.setBool(AppPrefs.kUnreadHistory, v),
               ),
+              SwitchSetting(
+                key: const Key('setting_history_times'),
+                icon: Icons.schedule,
+                title: l10n.settingsHistoryTimes,
+                summaryOn: l10n.settingsAlwaysDisplay,
+                summaryOff: l10n.settingsDontDisplay,
+                value: prefs.historyTimes,
+                onChanged: (v) => notifier.setBool(AppPrefs.kHistoryTimes, v),
+              ),
               ChoiceSetting<String>(
                 key: const Key('setting_history_booked'),
                 icon: Icons.bookmarks_outlined,

@@ -14,6 +14,7 @@ class Appearance {
     this.displayVotingThumbs = true,
     this.entryUnreadColor,
     this.compact = false,
+    this.historyTimes = true,
   });
 
   factory Appearance.fromPrefs(AppPrefs prefs, {bool systemDark = true}) =>
@@ -24,6 +25,7 @@ class Appearance {
         displayVotingThumbs: prefs.displayVotingThumbs,
         entryUnreadColor: _parseColor(prefs.unreadAppearance),
         compact: prefs.density == 'compact',
+        historyTimes: prefs.historyTimes,
       );
 
   final bool isDark;
@@ -31,6 +33,7 @@ class Appearance {
   final double bookmarkPadding;
   final bool displayVotingThumbs;
   final bool compact;
+  final bool historyTimes;
 
   final Color? entryUnreadColor;
 
