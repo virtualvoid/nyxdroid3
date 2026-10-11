@@ -13,6 +13,7 @@ import '../features/auth/authorized_notifier.dart';
 import '../features/notifications/status_counts_provider.dart';
 import '../features/push/push_service.dart';
 import '../features/share/share_service.dart';
+import '../features/update/update_service.dart';
 import '../l10n/app_localizations.dart';
 import 'app_resume_notifier.dart';
 import 'nyx_theme.dart';
@@ -33,10 +34,13 @@ class _NyxdroidAppState extends ConsumerState<NyxdroidApp>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     ref.read(shareServiceProvider).start();
-    ref.listenManual<int>(
-      appResumeProvider,
-      (_, _) => ref.invalidate(statusCountsProvider),
-    );
+    ref.listenManual<int>(appResumeProvider, (_, _) {
+      ref.invalidate(statusCountsProvider);
+      ref.read(updateServiceProvider).checkInBackground();
+    });
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) ref.read(updateServiceProvider).checkInBackground();
+    });
     ref.listenManual<bool>(authorizedProvider, (_, authorized) {
       final push = ref.read(pushServiceProvider);
       authorized ? push.start() : push.stop();

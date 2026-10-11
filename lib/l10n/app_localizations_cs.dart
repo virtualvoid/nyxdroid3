@@ -606,4 +606,48 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get settingsHistoryTimes => 'Časy v historii';
+
+  @override
+  String get aboutUpdates => 'Aktualizace';
+
+  @override
+  String get updateCheckNow => 'Zkontrolovat aktualizace';
+
+  @override
+  String get updateChecking => 'Kontroluji…';
+
+  @override
+  String get updateUpToDate => 'Používáte nejnovější verzi.';
+
+  @override
+  String get updateCheckFailed => 'Aktualizace se nepodařilo zkontrolovat.';
+
+  @override
+  String updateAvailableTitle(String version) {
+    return 'Nová verze $version';
+  }
+
+  @override
+  String updateCurrentVersion(String version) {
+    return 'Nainstalovaná verze: $version';
+  }
+
+  @override
+  String get updateDownload => 'Stáhnout';
+
+  @override
+  String get updateLater => 'Později';
+
+  @override
+  String get updateSkip => 'Přeskočit tuto verzi';
+
+  @override
+  String get settingsUpdateCheck => 'Kontrolovat aktualizace';
+
+  @override
+  String get settingsUpdateCheckOn =>
+      'Při spuštění aplikace se na GitHubu zkontroluje nová verze.';
+
+  @override
+  String get settingsUpdateCheckOff => 'Nové verze se nekontrolují.';
 }

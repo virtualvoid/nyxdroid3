@@ -13,6 +13,7 @@ import '../../core/telemetry/telemetry_gateway.dart';
 import '../../l10n/app_localizations.dart';
 import '../auth/authorized_notifier.dart';
 import '../push/push_service.dart';
+import '../update/update_service.dart';
 import 'choice_option.dart';
 import 'choice_setting.dart';
 import '../../app/widgets/section_card.dart';
@@ -236,6 +237,16 @@ class SettingsScreen extends ConsumerWidget {
                 onChanged: (v) =>
                     notifier.setString(AppPrefs.kHistoryBooked, v),
               ),
+              if (ref.read(updateServiceProvider).supported)
+                SwitchSetting(
+                  key: const Key('setting_update_check'),
+                  icon: Icons.system_update,
+                  title: l10n.settingsUpdateCheck,
+                  summaryOn: l10n.settingsUpdateCheckOn,
+                  summaryOff: l10n.settingsUpdateCheckOff,
+                  value: prefs.updateCheck,
+                  onChanged: (v) => notifier.setBool(AppPrefs.kUpdateCheck, v),
+                ),
               SwitchSetting(
                 key: const Key('setting_backpress'),
                 icon: Icons.arrow_back,

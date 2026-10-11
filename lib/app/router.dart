@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/providers.dart';
+import 'root_navigator_key.dart';
 import '../features/auth/authorization_screen.dart';
 import '../features/auth/authorized_notifier.dart';
 import '../features/bookmarks/bookmarks_controller.dart';
@@ -62,6 +63,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   ref.onDispose(refresh.dispose);
 
   return GoRouter(
+    navigatorKey: ref.read(rootNavigatorKeyProvider),
     initialLocation: Routes.home,
     refreshListenable: refresh,
     redirect: (context, state) {

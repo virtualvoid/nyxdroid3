@@ -608,4 +608,48 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsHistoryTimes => 'Times in history';
+
+  @override
+  String get aboutUpdates => 'Updates';
+
+  @override
+  String get updateCheckNow => 'Check for updates';
+
+  @override
+  String get updateChecking => 'Checking…';
+
+  @override
+  String get updateUpToDate => 'You are on the latest version.';
+
+  @override
+  String get updateCheckFailed => 'Could not check for updates.';
+
+  @override
+  String updateAvailableTitle(String version) {
+    return 'New version $version';
+  }
+
+  @override
+  String updateCurrentVersion(String version) {
+    return 'Installed version: $version';
+  }
+
+  @override
+  String get updateDownload => 'Download';
+
+  @override
+  String get updateLater => 'Later';
+
+  @override
+  String get updateSkip => 'Skip this version';
+
+  @override
+  String get settingsUpdateCheck => 'Check for updates';
+
+  @override
+  String get settingsUpdateCheckOn =>
+      'A new version is looked up on GitHub when the app starts.';
+
+  @override
+  String get settingsUpdateCheckOff => 'New versions are not checked.';
 }

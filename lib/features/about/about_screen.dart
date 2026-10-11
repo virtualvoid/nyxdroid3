@@ -7,12 +7,14 @@ import '../../app/app_drawer.dart';
 import '../../app/drawer_edge.dart';
 import '../../app/widgets/section_card.dart';
 import '../../app/widgets/tonal_icon.dart';
+import '../../core/constants.dart';
 import '../../l10n/app_localizations.dart';
 import '../discussion/link_actions.dart';
+import '../update/update_check_tile.dart';
 import 'about_credits.dart';
 import 'app_version_provider.dart';
 
-const aboutSourceUrl = 'https://github.com/virtualvoid/nyxdroid2027';
+const aboutSourceUrl = 'https://github.com/${Constants.githubRepo}';
 const aboutWebsiteUrl = 'https://nyx.cz';
 
 class AboutScreen extends ConsumerWidget {
@@ -113,6 +115,7 @@ class AboutScreen extends ConsumerWidget {
               ),
             ],
           ),
+          const UpdateCheckSection(),
           SectionCard(
             title: l10n.aboutLinks,
             children: [
@@ -120,7 +123,7 @@ class AboutScreen extends ConsumerWidget {
                 key: const Key('about_link_source'),
                 leading: const TonalIcon(Icons.code),
                 title: Text(l10n.aboutSourceCode),
-                subtitle: const Text('github.com/virtualvoid/nyxdroid2027'),
+                subtitle: const Text('github.com/${Constants.githubRepo}'),
                 trailing: const Icon(Icons.open_in_new, size: 18),
                 onTap: () => openExternal(context, aboutSourceUrl),
               ),

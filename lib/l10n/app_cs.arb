@@ -219,5 +219,32 @@
   "settingsDensitySummary": "Kompaktní zobrazení šetří místo na obrazovce v seznamech a příspěvcích.",
   "densityCompact": "Kompaktní",
   "densityComfortable": "Pohodlná",
-  "settingsHistoryTimes": "Časy v historii"
+  "settingsHistoryTimes": "Časy v historii",
+  "aboutUpdates": "Aktualizace",
+  "updateCheckNow": "Zkontrolovat aktualizace",
+  "updateChecking": "Kontroluji…",
+  "updateUpToDate": "Používáte nejnovější verzi.",
+  "updateCheckFailed": "Aktualizace se nepodařilo zkontrolovat.",
+  "updateAvailableTitle": "Nová verze {version}",
+  "@updateAvailableTitle": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateCurrentVersion": "Nainstalovaná verze: {version}",
+  "@updateCurrentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateDownload": "Stáhnout",
+  "updateLater": "Později",
+  "updateSkip": "Přeskočit tuto verzi",
+  "settingsUpdateCheck": "Kontrolovat aktualizace",
+  "settingsUpdateCheckOn": "Při spuštění aplikace se na GitHubu zkontroluje nová verze.",
+  "settingsUpdateCheckOff": "Nové verze se nekontrolují."
 }

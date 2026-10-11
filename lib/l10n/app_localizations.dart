@@ -1165,6 +1165,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Times in history'**
   String get settingsHistoryTimes;
+
+  /// No description provided for @aboutUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates'**
+  String get aboutUpdates;
+
+  /// No description provided for @updateCheckNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for updates'**
+  String get updateCheckNow;
+
+  /// No description provided for @updateChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking…'**
+  String get updateChecking;
+
+  /// No description provided for @updateUpToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'You are on the latest version.'**
+  String get updateUpToDate;
+
+  /// No description provided for @updateCheckFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not check for updates.'**
+  String get updateCheckFailed;
+
+  /// No description provided for @updateAvailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New version {version}'**
+  String updateAvailableTitle(String version);
+
+  /// No description provided for @updateCurrentVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Installed version: {version}'**
+  String updateCurrentVersion(String version);
+
+  /// No description provided for @updateDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get updateDownload;
+
+  /// No description provided for @updateLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get updateLater;
+
+  /// No description provided for @updateSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip this version'**
+  String get updateSkip;
+
+  /// No description provided for @settingsUpdateCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for updates'**
+  String get settingsUpdateCheck;
+
+  /// No description provided for @settingsUpdateCheckOn.
+  ///
+  /// In en, this message translates to:
+  /// **'A new version is looked up on GitHub when the app starts.'**
+  String get settingsUpdateCheckOn;
+
+  /// No description provided for @settingsUpdateCheckOff.
+  ///
+  /// In en, this message translates to:
+  /// **'New versions are not checked.'**
+  String get settingsUpdateCheckOff;
 }
 
 class _AppLocalizationsDelegate

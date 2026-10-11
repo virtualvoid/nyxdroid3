@@ -26,6 +26,18 @@ class AppPrefs {
   static const kHistoryBooked = 'history_show_booked';
   static const kDensity = 'layout_density';
   static const kHistoryTimes = 'history_times';
+  static const kUpdateCheck = 'update_check';
+  static const kUpdateLastCheck = 'update_last_check';
+  static const kUpdateSkipped = 'update_skipped_version';
+
+  bool get updateCheck => _prefs.getBool(kUpdateCheck) ?? true;
+
+  DateTime? get updateLastCheck {
+    final ms = int.tryParse(_prefs.getString(kUpdateLastCheck) ?? '');
+    return ms == null ? null : DateTime.fromMillisecondsSinceEpoch(ms);
+  }
+
+  String? get updateSkippedVersion => _prefs.getString(kUpdateSkipped);
 
   bool get historyTimes => _prefs.getBool(kHistoryTimes) ?? true;
 

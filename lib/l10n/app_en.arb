@@ -219,5 +219,32 @@
   "settingsDensitySummary": "Compact layout saves screen space in lists and posts.",
   "densityCompact": "Compact",
   "densityComfortable": "Comfortable",
-  "settingsHistoryTimes": "Times in history"
+  "settingsHistoryTimes": "Times in history",
+  "aboutUpdates": "Updates",
+  "updateCheckNow": "Check for updates",
+  "updateChecking": "Checking…",
+  "updateUpToDate": "You are on the latest version.",
+  "updateCheckFailed": "Could not check for updates.",
+  "updateAvailableTitle": "New version {version}",
+  "@updateAvailableTitle": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateCurrentVersion": "Installed version: {version}",
+  "@updateCurrentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateDownload": "Download",
+  "updateLater": "Later",
+  "updateSkip": "Skip this version",
+  "settingsUpdateCheck": "Check for updates",
+  "settingsUpdateCheckOn": "A new version is looked up on GitHub when the app starts.",
+  "settingsUpdateCheckOff": "New versions are not checked."
 }
