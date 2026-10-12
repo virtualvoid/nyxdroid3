@@ -246,5 +246,8 @@
   "updateSkip": "Přeskočit tuto verzi",
   "settingsUpdateCheck": "Kontrolovat aktualizace",
   "settingsUpdateCheckOn": "Při spuštění aplikace se na GitHubu zkontroluje nová verze.",
-  "settingsUpdateCheckOff": "Nové verze se nekontrolují."
+  "settingsUpdateCheckOff": "Nové verze se nekontrolují.",
+  "settingsNotificationBulb": "Žárovka s oznámeními",
+  "settingsNotificationBulbOn": "V horní liště se zobrazuje žárovka s počtem nepřečtených oznámení.",
+  "settingsNotificationBulbOff": "Žárovka se nezobrazuje."
 }

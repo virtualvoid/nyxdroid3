@@ -330,6 +330,16 @@ class SettingsScreen extends ConsumerWidget {
                   await ref.read(pushServiceProvider).setEnabled(v);
                 },
               ),
+              SwitchSetting(
+                key: const Key('setting_notification_bulb'),
+                icon: Icons.lightbulb_outline,
+                title: l10n.settingsNotificationBulb,
+                summaryOn: l10n.settingsNotificationBulbOn,
+                summaryOff: l10n.settingsNotificationBulbOff,
+                value: prefs.notificationBulb,
+                onChanged: (v) =>
+                    notifier.setBool(AppPrefs.kNotificationBulb, v),
+              ),
             ],
           ),
         ],

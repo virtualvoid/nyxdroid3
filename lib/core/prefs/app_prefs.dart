@@ -26,9 +26,12 @@ class AppPrefs {
   static const kHistoryBooked = 'history_show_booked';
   static const kDensity = 'layout_density';
   static const kHistoryTimes = 'history_times';
+  static const kNotificationBulb = 'notification_bulb';
   static const kUpdateCheck = 'update_check';
   static const kUpdateLastCheck = 'update_last_check';
   static const kUpdateSkipped = 'update_skipped_version';
+
+  bool get notificationBulb => _prefs.getBool(kNotificationBulb) ?? true;
 
   bool get updateCheck => _prefs.getBool(kUpdateCheck) ?? true;
 

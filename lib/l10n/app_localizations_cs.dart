@@ -650,4 +650,14 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get settingsUpdateCheckOff => 'Nové verze se nekontrolují.';
+
+  @override
+  String get settingsNotificationBulb => 'Žárovka s oznámeními';
+
+  @override
+  String get settingsNotificationBulbOn =>
+      'V horní liště se zobrazuje žárovka s počtem nepřečtených oznámení.';
+
+  @override
+  String get settingsNotificationBulbOff => 'Žárovka se nezobrazuje.';
 }

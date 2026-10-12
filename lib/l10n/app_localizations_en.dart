@@ -652,4 +652,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsUpdateCheckOff => 'New versions are not checked.';
+
+  @override
+  String get settingsNotificationBulb => 'Notifications bulb';
+
+  @override
+  String get settingsNotificationBulbOn =>
+      'A bulb with the unread count is shown in the top bar.';
+
+  @override
+  String get settingsNotificationBulbOff => 'The bulb is hidden.';
 }

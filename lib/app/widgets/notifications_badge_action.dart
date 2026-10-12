@@ -1,10 +1,12 @@
 // author: juraj.suchan@gmail.com
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/providers.dart';
 import '../../l10n/app_localizations.dart';
 
-class NotificationsBadgeAction extends StatelessWidget {
+class NotificationsBadgeAction extends ConsumerWidget {
   const NotificationsBadgeAction({
     super.key,
     required this.unread,
@@ -15,8 +17,11 @@ class NotificationsBadgeAction extends StatelessWidget {
   final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context) {
-    if (unread <= 0) return const SizedBox.shrink();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final enabled = ref.watch(
+      appPrefsProvider.select((p) => p.notificationBulb),
+    );
+    if (!enabled || unread <= 0) return const SizedBox.shrink();
     return IconButton(
       key: const Key('notifications_badge'),
       tooltip: AppLocalizations.of(context).menuNotifications,

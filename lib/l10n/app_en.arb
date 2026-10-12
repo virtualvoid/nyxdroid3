@@ -246,5 +246,8 @@
   "updateSkip": "Skip this version",
   "settingsUpdateCheck": "Check for updates",
   "settingsUpdateCheckOn": "A new version is looked up on GitHub when the app starts.",
-  "settingsUpdateCheckOff": "New versions are not checked."
+  "settingsUpdateCheckOff": "New versions are not checked.",
+  "settingsNotificationBulb": "Notifications bulb",
+  "settingsNotificationBulbOn": "A bulb with the unread count is shown in the top bar.",
+  "settingsNotificationBulbOff": "The bulb is hidden."
 }

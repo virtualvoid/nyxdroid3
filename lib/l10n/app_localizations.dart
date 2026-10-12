@@ -1243,6 +1243,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New versions are not checked.'**
   String get settingsUpdateCheckOff;
+
+  /// No description provided for @settingsNotificationBulb.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications bulb'**
+  String get settingsNotificationBulb;
+
+  /// No description provided for @settingsNotificationBulbOn.
+  ///
+  /// In en, this message translates to:
+  /// **'A bulb with the unread count is shown in the top bar.'**
+  String get settingsNotificationBulbOn;
+
+  /// No description provided for @settingsNotificationBulbOff.
+  ///
+  /// In en, this message translates to:
+  /// **'The bulb is hidden.'**
+  String get settingsNotificationBulbOff;
 }
 
 class _AppLocalizationsDelegate
