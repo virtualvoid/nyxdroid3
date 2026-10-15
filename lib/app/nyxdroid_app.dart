@@ -16,6 +16,7 @@ import '../features/share/share_service.dart';
 import '../features/update/update_service.dart';
 import '../l10n/app_localizations.dart';
 import 'app_resume_notifier.dart';
+import 'nyx_scroll_behavior.dart';
 import 'nyx_theme.dart';
 import 'platform_brightness_notifier.dart';
 import 'router.dart';
@@ -84,6 +85,8 @@ class _NyxdroidAppState extends ConsumerState<NyxdroidApp>
       darkTheme: NyxTheme.dark(),
       themeMode: themeModeFromPref(prefs.themeMode),
       locale: localeFromPref(prefs.language),
+      restorationScopeId: 'nyxdroid',
+      scrollBehavior: const NyxScrollBehavior(),
       routerConfig: ref.watch(routerProvider),
       localizationsDelegates: const [
         AppLocalizations.delegate,

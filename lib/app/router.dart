@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/providers.dart';
+import '../core/telemetry/screen_view_observer.dart';
+import '../core/telemetry/telemetry_gateway.dart';
 import 'root_navigator_key.dart';
 import '../features/auth/authorization_screen.dart';
 import '../features/auth/authorized_notifier.dart';
@@ -64,6 +66,12 @@ final routerProvider = Provider<GoRouter>((ref) {
 
   return GoRouter(
     navigatorKey: ref.read(rootNavigatorKeyProvider),
+    restorationScopeId: 'router',
+    observers: [
+      ScreenViewObserver(
+        (name) => ref.read(telemetryGatewayProvider).logScreen(name),
+      ),
+    ],
     initialLocation: Routes.home,
     refreshListenable: refresh,
     redirect: (context, state) {
@@ -117,6 +125,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.compose,
+        redirect: (_, state) => state.extra is ComposeArgs ? null : Routes.home,
         builder: (_, state) => ComposeScreen(args: state.extra! as ComposeArgs),
       ),
       GoRoute(
@@ -132,6 +141,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: Routes.gallery,
+        redirect: (_, state) => state.extra is GalleryArgs ? null : Routes.home,
         builder: (_, state) => GalleryScreen(args: state.extra! as GalleryArgs),
       ),
       GoRoute(

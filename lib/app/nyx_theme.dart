@@ -59,6 +59,19 @@ class NyxTheme {
       colorScheme: colors,
       scaffoldBackgroundColor: colors.surface,
       extensions: [palette],
+      scrollbarTheme: ScrollbarThemeData(
+        interactive: true,
+        radius: const Radius.circular(5),
+        minThumbLength: 48,
+        thickness: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.dragged) ? 10 : 6,
+        ),
+        thumbColor: WidgetStateProperty.resolveWith(
+          (states) => colors.onSurfaceVariant.withValues(
+            alpha: states.contains(WidgetState.dragged) ? 0.9 : 0.6,
+          ),
+        ),
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: colors.surface,
         foregroundColor: colors.onSurface,

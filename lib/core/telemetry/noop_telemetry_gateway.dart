@@ -8,4 +8,7 @@ class NoopTelemetryGateway implements TelemetryGateway {
 
   @override
   Future<void> setAnalytics(bool enabled, {String? nick}) async {}
+
+  @override
+  Future<void> logScreen(String name) async {}
 }

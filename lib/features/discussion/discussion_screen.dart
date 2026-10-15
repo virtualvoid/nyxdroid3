@@ -27,6 +27,7 @@ import 'link_actions.dart';
 import 'link_target.dart';
 import 'post_actions.dart';
 import 'ratings_dialog.dart';
+import 'positioned_list_scrollbar.dart';
 import 'writeup_tile.dart';
 
 class DiscussionScreen extends ConsumerStatefulWidget {
@@ -484,29 +485,38 @@ class _DiscussionScreenState extends ConsumerState<DiscussionScreen>
               error: state.error,
               onRetry: _refresh,
             )
-          : ScrollablePositionedList.builder(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              itemScrollController: _scroll,
-              itemPositionsListener: _positions,
+          : PositionedListScrollbar(
+              positions: _positions,
+              controller: _scroll,
               itemCount: state.writeups.length,
-              itemBuilder: (context, i) {
-                final wu = state.writeups[i];
-                return WriteupTile(
-                  key: ValueKey(wu.id),
-                  writeup: wu,
-                  appearance: appearance,
-                  now: now,
-                  onVote: (type) => _vote(wu, type),
-                  onPollVote: (key) => _controller.pollVote(wu.id, key),
-                  onLink: (url) => _onLink(url, writeupId: wu.id),
-                  onImage: (url) => _openGallery(wu.id, url),
-                  onTap: _selecting ? null : () => _compose([wu]),
-                  onLongPress: _selecting ? null : () => _onLongPress(wu),
-                  selectionVisible: _selecting,
-                  selected: _selected.containsKey(wu.id),
-                  onSelectedChanged: (on) => _select(wu, on),
-                );
-              },
+              child: ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context)
+                    .copyWith(scrollbars: false),
+                child: ScrollablePositionedList.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  itemScrollController: _scroll,
+                  itemPositionsListener: _positions,
+                  itemCount: state.writeups.length,
+                  itemBuilder: (context, i) {
+                    final wu = state.writeups[i];
+                    return WriteupTile(
+                      key: ValueKey(wu.id),
+                      writeup: wu,
+                      appearance: appearance,
+                      now: now,
+                      onVote: (type) => _vote(wu, type),
+                      onPollVote: (key) => _controller.pollVote(wu.id, key),
+                      onLink: (url) => _onLink(url, writeupId: wu.id),
+                      onImage: (url) => _openGallery(wu.id, url),
+                      onTap: _selecting ? null : () => _compose([wu]),
+                      onLongPress: _selecting ? null : () => _onLongPress(wu),
+                      selectionVisible: _selecting,
+                      selected: _selected.containsKey(wu.id),
+                      onSelectedChanged: (on) => _select(wu, on),
+                    );
+                  },
+                ),
+              ),
             ),
     );
   }

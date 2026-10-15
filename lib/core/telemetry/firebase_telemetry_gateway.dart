@@ -24,4 +24,11 @@ class FirebaseTelemetryGateway implements TelemetryGateway {
       await analytics.resetAnalyticsData();
     }
   }
+
+  @override
+  Future<void> logScreen(String name) async {
+    try {
+      await FirebaseAnalytics.instance.logScreenView(screenName: name);
+    } catch (_) {}
+  }
 }
