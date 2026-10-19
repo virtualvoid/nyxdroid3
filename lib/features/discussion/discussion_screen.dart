@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../app/app_drawer.dart';
+import '../../app/drawer_edge.dart';
 import '../../app/router.dart';
 import '../../app/widgets/common_widgets.dart';
 import '../../app/widgets/empty_refresh_list.dart';
@@ -369,6 +371,7 @@ class _DiscussionScreenState extends ConsumerState<DiscussionScreen>
     final loading = state.loading || state.loadingMore;
 
     return AppBar(
+      leading: Navigator.of(context).canPop() ? const BackButton() : null,
       title: _searchOpen
           ? TextField(
               controller: _search,
@@ -571,6 +574,9 @@ class _DiscussionScreenState extends ConsumerState<DiscussionScreen>
         }
       },
       child: Scaffold(
+        drawer: const AppDrawer(),
+        drawerEdgeDragWidth: drawerEdgeDragWidth(context),
+        drawerEnableOpenDragGesture: !_selecting,
         appBar: _appBar(l10n, state, title),
         body: IndexedStack(
           index: _tabs.index,
