@@ -1,13 +1,18 @@
 // author: juraj.suchan@gmail.com
 
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/guarded_loader.dart';
 import '../../core/latest_request_guard.dart';
 import '../../core/providers.dart';
 import 'bookmark_list_item.dart';
+import 'bookmarks_repository.dart';
 import 'bookmarks_result.dart';
 import 'bookmarks_state.dart';
+
+const historyUndoDuration = Duration(seconds: 5);
 
 class BookmarksController extends Notifier<BookmarksState>
     with LatestRequestGuard, GuardedLoader<BookmarksState> {
@@ -15,8 +20,20 @@ class BookmarksController extends Notifier<BookmarksState>
 
   final BookmarksMode mode;
 
+  Timer? _removalTimer;
+  List<int> _removalIds = const [];
+  List<BookmarkListItem> _removalSnapshot = const [];
+  BookmarksRepository? _removalRepository;
+
   @override
   BookmarksState build() {
+    ref.onDispose(() {
+      _removalTimer?.cancel();
+      final repository = _removalRepository;
+      if (repository != null && _removalIds.isNotEmpty) {
+        unawaited(repository.removeFromHistory(_removalIds).catchError((_) {}));
+      }
+    });
     final prefs = ref.read(appPrefsProvider);
     return BookmarksState(
       showRead: mode == BookmarksMode.history
@@ -26,6 +43,7 @@ class BookmarksController extends Notifier<BookmarksState>
   }
 
   Future<void> refresh({required String remindersTitle}) async {
+    await _commitRemoval();
     await _load(
       searching: false,
       expansion: const {},
@@ -126,8 +144,9 @@ class BookmarksController extends Notifier<BookmarksState>
       if (item is DiscussionItem && item.bookmark.unread > 0) item.bookmark.id,
   ]);
 
-  Future<bool> removeFromHistory(List<int> discussionIds) async {
-    if (discussionIds.isEmpty) return true;
+  void removeFromHistory(List<int> discussionIds) {
+    if (discussionIds.isEmpty) return;
+    unawaited(_commitRemoval());
     final before = state.all;
     state = state.copyWith(
       all: [
@@ -137,13 +156,41 @@ class BookmarksController extends Notifier<BookmarksState>
             item,
       ],
     );
-    final ok = await attempt<bool>(() async {
-      await ref
-          .read(bookmarksRepositoryProvider)
-          .removeFromHistory(discussionIds);
+    _removalIds = discussionIds;
+    _removalSnapshot = before;
+    _removalRepository = ref.read(bookmarksRepositoryProvider);
+    _removalTimer = Timer(
+      historyUndoDuration + const Duration(seconds: 1),
+      () => unawaited(_commitRemoval()),
+    );
+  }
+
+  void undoHistoryRemoval() {
+    if (_removalIds.isEmpty) return;
+    _removalTimer?.cancel();
+    final snapshot = _removalSnapshot;
+    _clearRemoval();
+    state = state.copyWith(all: snapshot);
+  }
+
+  void _clearRemoval() {
+    _removalTimer = null;
+    _removalIds = const [];
+    _removalSnapshot = const [];
+    _removalRepository = null;
+  }
+
+  Future<void> _commitRemoval() async {
+    final ids = _removalIds;
+    final snapshot = _removalSnapshot;
+    final repository = _removalRepository;
+    _removalTimer?.cancel();
+    _clearRemoval();
+    if (ids.isEmpty || repository == null) return;
+    await attempt<bool>(() async {
+      await repository.removeFromHistory(ids);
       return true;
-    }, (s, e) => s.copyWith(all: before, error: e));
-    return ok == true;
+    }, (s, e) => s.copyWith(all: snapshot, error: e));
   }
 
   Future<void> _load({

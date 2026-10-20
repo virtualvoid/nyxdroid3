@@ -1261,6 +1261,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The bulb is hidden.'**
   String get settingsNotificationBulbOff;
+
+  /// No description provided for @undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// No description provided for @historyRemovedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Removed from history: {name}'**
+  String historyRemovedSnack(String name);
 }
 
 class _AppLocalizationsDelegate

@@ -249,5 +249,14 @@
   "settingsUpdateCheckOff": "New versions are not checked.",
   "settingsNotificationBulb": "Notifications bulb",
   "settingsNotificationBulbOn": "A bulb with the unread count is shown in the top bar.",
-  "settingsNotificationBulbOff": "The bulb is hidden."
+  "settingsNotificationBulbOff": "The bulb is hidden.",
+  "undo": "Undo",
+  "historyRemovedSnack": "Removed from history: {name}",
+  "@historyRemovedSnack": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

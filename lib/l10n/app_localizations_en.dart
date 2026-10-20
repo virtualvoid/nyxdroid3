@@ -662,4 +662,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsNotificationBulbOff => 'The bulb is hidden.';
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String historyRemovedSnack(String name) {
+    return 'Removed from history: $name';
+  }
 }

@@ -1,5 +1,6 @@
 // author: juraj.suchan@gmail.com
 
+import 'dart:math' as math;
 import 'dart:ui' show PlatformDispatcher;
 
 import 'package:flutter/material.dart';
@@ -86,6 +87,26 @@ class _NyxdroidAppState extends ConsumerState<NyxdroidApp>
       themeMode: themeModeFromPref(prefs.themeMode),
       locale: localeFromPref(prefs.language),
       restorationScopeId: 'nyxdroid',
+      builder: (context, child) {
+        final media = MediaQuery.of(context);
+        final inset = math.max(
+          0.0,
+          media.viewPadding.bottom - media.viewInsets.bottom,
+        );
+        return ColoredBox(
+          color: Theme.of(context).colorScheme.surface,
+          child: Padding(
+            padding: EdgeInsets.only(bottom: inset),
+            child: MediaQuery(
+              data: media.copyWith(
+                padding: media.padding.copyWith(bottom: 0),
+                viewPadding: media.viewPadding.copyWith(bottom: 0),
+              ),
+              child: child!,
+            ),
+          ),
+        );
+      },
       scrollBehavior: const NyxScrollBehavior(),
       routerConfig: ref.watch(routerProvider),
       localizationsDelegates: const [

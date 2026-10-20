@@ -249,5 +249,14 @@
   "settingsUpdateCheckOff": "Nové verze se nekontrolují.",
   "settingsNotificationBulb": "Žárovka s oznámeními",
   "settingsNotificationBulbOn": "V horní liště se zobrazuje žárovka s počtem nepřečtených oznámení.",
-  "settingsNotificationBulbOff": "Žárovka se nezobrazuje."
+  "settingsNotificationBulbOff": "Žárovka se nezobrazuje.",
+  "undo": "Vrátit zpět",
+  "historyRemovedSnack": "Odebráno z historie: {name}",
+  "@historyRemovedSnack": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

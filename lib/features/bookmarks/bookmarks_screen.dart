@@ -221,11 +221,15 @@ class _BookmarksScreenState extends ConsumerState<BookmarksScreen> {
   }) {
     final now = DateTime.now();
     final entries = <Object>[];
-    for (final section in groupHistoryByDay(
-      items.whereType<DiscussionItem>().toList(),
-    )) {
-      entries.add((day: section.day));
-      entries.addAll(section.items);
+    if (appearance.historyTimes) {
+      for (final section in groupHistoryByDay(
+        items.whereType<DiscussionItem>().toList(),
+      )) {
+        entries.add((day: section.day));
+        entries.addAll(section.items);
+      }
+    } else {
+      entries.addAll(items.whereType<DiscussionItem>());
     }
     if (hasMore) entries.add((footer: true));
 
@@ -286,7 +290,7 @@ class _BookmarksScreenState extends ConsumerState<BookmarksScreen> {
         }
         return true;
       },
-      onDismissed: (_) => _controller.removeFromHistory([bookmark.id]),
+      onDismissed: (_) => _removeFromHistory(bookmark),
       child: BookmarkRow(
         bookmark: bookmark,
         appearance: appearance,
@@ -297,6 +301,30 @@ class _BookmarksScreenState extends ConsumerState<BookmarksScreen> {
         onLongPress: () => _historyActions(bookmark),
       ),
     );
+  }
+
+  void _removeFromHistory(Bookmark bookmark) {
+    final l10n = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    _controller.removeFromHistory([bookmark.id]);
+    messenger
+      ..clearSnackBars()
+      ..showSnackBar(
+        SnackBar(
+          key: const Key('history_removed_snack'),
+          persist: false,
+          duration: historyUndoDuration,
+          content: Text(
+            l10n.historyRemovedSnack(bookmark.name),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          action: SnackBarAction(
+            label: l10n.undo,
+            onPressed: _controller.undoHistoryRemoval,
+          ),
+        ),
+      );
   }
 
   Future<void> _historyActions(Bookmark bookmark) async {
@@ -318,7 +346,7 @@ class _BookmarksScreenState extends ConsumerState<BookmarksScreen> {
       case HistoryAction.markRead:
         await _controller.markHistoryRead([bookmark.id]);
       case HistoryAction.remove:
-        await _controller.removeFromHistory([bookmark.id]);
+        _removeFromHistory(bookmark);
       case null:
         break;
     }

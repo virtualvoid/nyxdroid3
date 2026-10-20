@@ -660,4 +660,12 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get settingsNotificationBulbOff => 'Žárovka se nezobrazuje.';
+
+  @override
+  String get undo => 'Vrátit zpět';
+
+  @override
+  String historyRemovedSnack(String name) {
+    return 'Odebráno z historie: $name';
+  }
 }

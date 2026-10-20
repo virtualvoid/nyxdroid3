@@ -71,6 +71,8 @@ class EntryHeader extends StatelessWidget {
                 ? '[${relativeTime(l10n, loc.lastActivity!, now)}]'
                 : '[${relativeTime(l10n, loc.lastActivity!, now)}] ${loc.location}',
             textAlign: mirrored ? TextAlign.end : TextAlign.start,
+            maxLines: stacked ? 1 : null,
+            overflow: stacked ? TextOverflow.ellipsis : null,
             style: const TextStyle(fontSize: 8),
           )
         : null;
@@ -80,14 +82,10 @@ class EntryHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [nickText, mark]),
-          Row(
-            children: [
-              timeText,
-              if (locationText != null) ...[
-                const SizedBox(width: 6),
-                Flexible(child: locationText),
-              ],
-            ],
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 6,
+            children: [timeText, ?locationText],
           ),
         ],
       );
