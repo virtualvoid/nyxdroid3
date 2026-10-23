@@ -256,7 +256,9 @@ class _DiscussionScreenState extends ConsumerState<DiscussionScreen>
           writeupId: wu.id,
         );
       case PostAction.copy:
-        await Clipboard.setData(ClipboardData(text: stripHtmlTags(wu.content)));
+        await Clipboard.setData(
+          ClipboardData(text: htmlToPlainText(wu.content)),
+        );
       case PostAction.gallery:
         await _openGallery(wu.id, null);
       case PostAction.reminder:

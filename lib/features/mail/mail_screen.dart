@@ -100,7 +100,7 @@ class _MailScreenState extends ConsumerState<MailScreen> {
         await _compose(replyTo: mail, quote: true);
       case MailAction.copy:
         await Clipboard.setData(
-          ClipboardData(text: stripHtmlTags(mail.content)),
+          ClipboardData(text: htmlToPlainText(mail.content)),
         );
       case MailAction.reminder:
         await _controller.toggleReminder(mail.id);
