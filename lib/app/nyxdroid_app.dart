@@ -21,6 +21,7 @@ import 'nyx_scroll_behavior.dart';
 import 'nyx_theme.dart';
 import 'platform_brightness_notifier.dart';
 import 'router.dart';
+import 'widgets/drawer_edge_guard.dart';
 
 class NyxdroidApp extends ConsumerStatefulWidget {
   const NyxdroidApp({super.key});
@@ -102,7 +103,7 @@ class _NyxdroidAppState extends ConsumerState<NyxdroidApp>
                 padding: media.padding.copyWith(bottom: 0),
                 viewPadding: media.viewPadding.copyWith(bottom: 0),
               ),
-              child: child!,
+              child: DrawerEdgeGuard(child: child!),
             ),
           ),
         );

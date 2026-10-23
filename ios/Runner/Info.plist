@@ -26,6 +26,10 @@
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
+		<key>NSCameraUsageDescription</key>
+		<string>Nyxdroid uses the camera to take a photo that you attach to a post or a mail.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Nyxdroid reads photos from your library so that you can attach them to a post or a mail.</string>
 		<key>UIApplicationSceneManifest</key>
 		<dict>
 			<key>UIApplicationSupportsMultipleScenes</key>

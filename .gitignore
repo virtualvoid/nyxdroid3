@@ -77,3 +77,4 @@ coverage/
 *.tmp
 docs/
 BUILD.md
+IOS.md
